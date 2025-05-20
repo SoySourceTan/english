@@ -8,16 +8,17 @@ export const config = {
     // モンスター設定（レベルごとの追加モンスター）
     monsters: {
         1: [
-            { name: 'スライム', hpRange: [8, 14], exp: 22, attack: [1, 5], image: './images/zoma.png', bgm: './sounds/dq3-battle.mp3' }
+            { name: 'スライム', hpRange: [8, 14], exp: 22, attack: [1, 5], image: './images/zoma.png', bgm: './sounds/dq3-battle.mp3', weight: 0.4 },
+            { name: 'ドラキー', hpRange: [10, 14], exp: 40, attack: [1, 6], image: './images/zoma.png', bgm: './sounds/DQ2-battle.mp3', weight: 0.3 }
         ],
         2: [
-            { name: 'ドラキー', hpRange: [10, 14], exp: 40, attack: [2, 6], image: './images/zoma.png', bgm: './sounds/DQ2-battle.mp3' }
+            // レベル2では新たなモンスターなし（スライム、ドラキーはレベル1から引き続き出現）
         ],
         3: [
-            { name: 'ゴーレム', hpRange: [20, 30], exp: 60, attack: [5, 10], image: './images/zoma.png', bgm: './sounds/04 Monsters.mp3' }
+            { name: 'ゴーレム', hpRange: [20, 30], exp: 60, attack: [5, 10], image: './images/zoma.png', bgm: './sounds/04 Monsters.mp3', weight: 0.2 }
         ],
         4: [
-            { name: 'ゾーマ', hpRange: [50, 70], exp: 100, attack: [10, 15], image: './images/zoma.png', bgm: './sounds/zoma-bgm.mp3' }
+            { name: 'ゾーマ', hpRange: [50, 70], exp: 100, attack: [10, 15], image: './images/zoma.png', bgm: './sounds/zoma-bgm.mp3', weight: 0.1 }
         ]
     },
     // LVアップに必要なEXPの倍率

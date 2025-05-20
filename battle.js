@@ -33,6 +33,20 @@ export const soundEffects = {
     battleBgm: null
 };
 
+// 重み付きランダム選択関数
+function weightedRandom(items, weights) {
+    const totalWeight = weights.reduce((sum, w) => sum + w, 0);
+    const rand = Math.random() * totalWeight;
+    let currentWeight = 0;
+    for (let i = 0; i < items.length; i++) {
+        currentWeight += weights[i] || 1;
+        if (rand <= currentWeight) {
+            return items[i];
+        }
+    }
+    return items[items.length - 1];
+}
+
 export function nextBattle() {
     let selectedMonster;
 
@@ -47,9 +61,24 @@ export function nextBattle() {
             }
         }
     } else {
-        // 通常モード
-        const availableMonsters = config.monsters[quizState.level] || config.monsters[1];
-        selectedMonster = availableMonsters[Math.floor(Math.random() * availableMonsters.length)];
+        // 通常モード：レベル1から現在のレベルまでの全モンスターを収集
+        const availableMonsters = [];
+        const weights = [];
+        for (let level = 1; level <= quizState.level; level++) {
+            if (config.monsters[level]) {
+                config.monsters[level].forEach(monster => {
+                    availableMonsters.push(monster);
+                    weights.push(monster.weight || 1);
+                });
+            }
+        }
+        // フォールバック：モンスターがない場合はレベル1を使用
+        if (availableMonsters.length === 0) {
+            availableMonsters.push(...(config.monsters[1] || []));
+            weights.push(...availableMonsters.map(() => 1));
+        }
+        // 重み付きランダムでモンスターを選択
+        selectedMonster = weightedRandom(availableMonsters, weights);
     }
 
     const [minHp, maxHp] = selectedMonster.hpRange;
@@ -108,6 +137,8 @@ export function nextBattle() {
     saveGameState();
 }
 
+
+   // ...（以降の関数は変更なし：initializeGodMode, restoreNormalMode, showCommandOptions, etc.）
 // プレイヤー状態を GOD モード用に初期化
 export function initializeGodMode() {
     // 元の状態を保存
