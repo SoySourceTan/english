@@ -1,0 +1,24 @@
+import { quizState } from './state.js';
+import { showCategoryMenu } from './battle.js';
+
+export const spells = {
+    ホイミ: { mp: 3, effect: () => restoreHp(Math.floor(Math.random() * (12 - 8 + 1)) + 8) },
+    ベホイミ: { mp: 8, effect: () => restoreHp(Math.floor(Math.random() * (80 - 40 + 1)) + 40) },
+    ベホマ: { mp: 15, effect: () => restoreHp(quizState.maxHp - quizState.hp) },
+    メラ: { mp: 5, effect: () => lowerMonsterHp(Math.floor(Math.random() * (30 - 6 + 1)) + 6) },
+    メラミ: { mp: 10, effect: () => lowerMonsterHp(Math.floor(Math.random() * (80 - 50 + 1)) + 50) },
+    メラゾーマ: { mp: 15, effect: () => lowerMonsterHp(Math.floor(Math.random() * (120 - 80 + 1)) + 80) },
+    ライデイン: { mp: 15, effect: () => lowerMonsterHp(Math.floor(Math.random() * (120 - 80 + 1)) + 80) },
+    ギガデイン: { mp: 20, effect: () => lowerMonsterHp(Math.floor(Math.random() * (180 - 120 + 1)) + 120) },
+    カテゴリー選択: { mp: 2, effect: () => showCategoryMenu() }
+};
+
+function restoreHp(amount) {
+    quizState.hp = Math.min(quizState.hp + amount, quizState.maxHp);
+}
+
+function lowerMonsterHp(amount) {
+    if (quizState.monster) {
+        quizState.monster.currentHp = Math.max(quizState.monster.currentHp - amount, 0);
+    }
+}

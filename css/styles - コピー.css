@@ -1,0 +1,240 @@
+body { 
+    font-family: Arial, sans-serif; 
+    margin: 0; 
+    padding-top: 100px;
+    text-align: center; 
+}
+h1 { font-size: 26px; }
+p { font-size: 18px; }
+.search-container { margin: 20px 0; }
+.search-container input { padding: 8px; width: 300px; font-size: 16px; }
+.voice-select-container { margin: 10px 0; }
+.voice-select-container label { font-size: 16px; margin-right: 10px; }
+.voice-select-container .form-check { display: inline-block; margin: 0 10px 10px 0; }
+.voice-select-btn { display: none; }
+
+/* スティッキーヘッダー */
+.sticky-header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background: linear-gradient(135deg, #1e90ff, #00b7eb);
+    color: white;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    z-index: 1000;
+    padding: 10px 0;
+}
+.sticky-header h1 {
+    font-size: 20px;
+    margin: 0;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+}
+.player-info {
+    font-size: 14px;
+    margin-top: 5px;
+}
+.player-info span {
+    margin: 0 10px;
+}
+.progress {
+    height: 15px;
+    margin: 5px 0;
+}
+.progress-bar {
+    transition: width 0.3s ease-in-out;
+}
+
+/* モーダル */
+.modal-content {
+    border: 2px solid #1e90ff;
+    background: #f0f8ff;
+}
+.modal-title {
+    color: #1e90ff;
+}
+
+/* DQ3戦闘画面 */
+.dq3-screen {
+    background: #000;
+    font-family: 'PixelMplus10', monospace;
+    color: #fff;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 20px;
+    box-sizing: border-box;
+    transition: all 0.1s ease;
+}
+.dq3-screen.shake {
+    animation: shake 0.5s;
+}
+@keyframes shake {
+    0% { transform: translate(0, 0); }
+    25% { transform: translate(5px, 5px); }
+    50% { transform: translate(-5px, -5px); }
+    75% { transform: translate(5px, -5px); }
+    100% { transform: translate(0, 0); }
+}
+.dq3-window {
+    background: #000;
+    border: 4px solid #fff;
+    padding: 10px;
+    margin: 5px;
+    font-size: 16px;
+    line-height: 1.5;
+    text-shadow: 1px 1px #000;
+    transition: border-color 0.1s ease;
+}
+.dq3-window.red-border {
+    border-color: #ff0000;
+}
+.status-window {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    width: 200px;
+}
+.monster-name-window {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 200px;
+}
+.battle-window {
+    flex: 1;
+    margin-top: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.command-window {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    width: 200px;
+}
+.message-window {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    width: 60%;
+    cursor: pointer;
+}
+.dq3-sprite {
+    width: 120px;
+    height: 120px;
+    background: url('images/zoma.png') no-repeat center;
+    background-size: contain;
+    margin: 20px;
+}
+.dq3-option, .dq3-btn {
+    background: #000;
+    border: 2px solid #fff;
+    color: #fff;
+    font-family: 'PixelMplus10', monospace;
+    font-size: 14px;
+    padding: 10px;
+    margin: 5px;
+    width: 100%;
+    text-align: left;
+    cursor: pointer;
+}
+.dq3-option:hover, .dq3-btn:hover {
+    background: #fff;
+    color: #000;
+}
+.dq3-command {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+.dq3-choices {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 10px;
+}
+.choice-btn, .end-btn {
+    width: 80px;
+}
+.dq3-modal .modal-content {
+    background: #000;
+    border: 4px solid #fff;
+    color: #fff;
+}
+.dq3-input {
+    background: #000;
+    border: 2px solid #fff;
+    color: #fff;
+    font-family: 'PixelMplus10', monospace;
+    padding: 5px;
+}
+.dq3-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+}
+.dq3-table th, .dq3-table td {
+    border: 2px solid #fff;
+    padding: 5px;
+}
+#battle-message, #battle-feedback, #quiz-question-line1, #quiz-question-line2 {
+    margin: 10px;
+    font-size: 16px;
+}
+
+/* モバイル */
+@media (max-width: 767px) {
+    .voice-select-container .inline-voice-select { display: none; }
+    .voice-select-btn { display: inline-block; font-size: 14px; }
+    .modal-fullscreen .modal-content { padding: 15px; }
+    .sticky-header h1 { font-size: 16px; }
+    .player-info { font-size: 12px; }
+    .player-info .progress { width: 100px; }
+    .dq3-window { font-size: 12px; }
+    .status-window, .command-window, .monster-name-window { width: 150px; }
+    .message-window { width: 50%; }
+    .dq3-sprite { width: 80px; height: 80px; }
+    .dq3-option, .dq3-btn { font-size: 12px; }
+    .choice-btn, .end-btn { width: 60px; }
+}
+
+/* タブとテーブル */
+.nav-tabs { justify-content: center; margin: 20px 0; }
+.nav-link { font-size: 18px; }
+table { width: 100%; border-collapse: collapse; }
+th, td { border: 1px solid #ddd; padding: 10px; text-align: left; font-size: 16px; }
+th { background-color: #f2f2f2; }
+td:hover { background-color: #f9f9f9; cursor: pointer; }
+.tab-pane { max-height: 600px; overflow-y: auto; }
+.btn { font-size: 16px; }
+.table-container { display: flex; flex-wrap: wrap; justify-content: center; }
+.table-container table { margin: 10px; }
+@media (max-width: 767px) { .table-container table { width: 80%; } }
+@media (min-width: 768px) and (max-width: 991px) { .table-container table { width: 45%; } }
+@media (min-width: 992px) { .table-container table { width: 30%; } }
+
+.effect-overlay { 
+    display: none; 
+    position: fixed; 
+    top: 50%; 
+    left: 50%; 
+    transform: translate(-50%, -50%); 
+    font-size: 10vw; 
+    z-index: 2000; 
+}
+.effect-overlay.correct { color: green; }
+.effect-overlay.wrong { color: red; }
+footer { margin-top: 20px; font-size: 16px; }
+#loadingModal { 
+    display: none; 
+    position: fixed; 
+    top: 50%; 
+    left: 50%; 
+    transform: translate(-50%, -50%); 
+    background: white; 
+    padding: 20px; 
+    border: 1px solid #ccc; 
+    z-index: 1000; 
+}
+#loadingModal.active { display: block; }
