@@ -8,13 +8,13 @@ export const config = {
     // モンスター設定（レベルごとの追加モンスター）
     monsters: {
         1: [
-            { name: 'スライム', hpRange: [8, 14], exp: 22, attack: [1, 5], image: './images/slime.png', bgm: './sounds/dq3-battle.mp3' }
+            { name: 'スライム', hpRange: [8, 14], exp: 22, attack: [1, 5], image: './images/zoma.png', bgm: './sounds/dq3-battle.mp3' }
         ],
         2: [
-            { name: 'ドラキー', hpRange: [10, 14], exp: 40, attack: [2, 6], image: './images/dracky.png', bgm: './sounds/DQ2-battle.mp3' }
+            { name: 'ドラキー', hpRange: [10, 14], exp: 40, attack: [2, 6], image: './images/zoma.png', bgm: './sounds/DQ2-battle.mp3' }
         ],
         3: [
-            { name: 'ゴーレム', hpRange: [20, 30], exp: 60, attack: [5, 10], image: './images/golem.png', bgm: './sounds/04 Monsters.mp3' }
+            { name: 'ゴーレム', hpRange: [20, 30], exp: 60, attack: [5, 10], image: './images/zoma.png', bgm: './sounds/04 Monsters.mp3' }
         ],
         4: [
             { name: 'ゾーマ', hpRange: [50, 70], exp: 100, attack: [10, 15], image: './images/zoma.png', bgm: './sounds/zoma-bgm.mp3' }
