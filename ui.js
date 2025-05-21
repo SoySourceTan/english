@@ -76,8 +76,8 @@ export function showFieldScreen() {
     typeMessage('冒険をつづけますか？', fieldMessage, () => {
         console.log('Rendering field options');
         fieldOptions.innerHTML = `
-            <button class="dq3-btn btn w-100" data-action="yes">はい</button>
-            <button class="dq3-btn btn w-100" data-action="no">いいえ</button>
+            <button class="dq3-btn btn w-100 text-center" data-action="yes">はい</button>
+            <button class="dq3-btn btn w-100 text-center" data-action="no">いいえ</button>
         `;
         console.log('Field options HTML:', fieldOptions.innerHTML);
     });
@@ -111,8 +111,8 @@ export function showReviveScreen() {
     fieldOptions.classList.remove('hidden'); // 非表示解除
     typeMessage('ふっかつのいのりを ささげますか？', fieldMessage, () => {
         fieldOptions.innerHTML = `
-            <button class="dq3-btn btn w-100" data-action="yes">はい</button>
-            <button class="dq3-btn btn w-100" data-action="no">いいえ</button>
+            <button class="dq3-btn btn w-100 text-center" data-action="yes">はい</button>
+            <button class="dq3-btn btn w-100 text-center" data-action="no">いいえ</button>
         `;
     });
     // 機能: 復活画面表示 - 終了

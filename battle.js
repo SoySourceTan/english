@@ -4,6 +4,9 @@ import { typeMessage, showQuizOptions } from './quiz.js';
 import { updateUI, showFieldScreen, showReviveScreen, showEscapeScreen } from './ui.js';
 import { playSpellEffect } from './effects.js';
 
+// デバッグログ：quizState のインポート確認
+console.log('quizState imported:', quizState);
+
 export const jobs = {
     thief: { name: 'とうぞく', quizPref: 'nouns' },
     warrior: { name: 'せんし', quizPref: 'nouns' },
@@ -102,7 +105,7 @@ export function nextBattle() {
         try {
             soundEffects.battleBgm = new Howl({
                 src: [quizState.monster.bgm],
-                volume: 0.3,
+                volume: 0.1,
                 loop: true
             });
             soundEffects.battleBgm.play();
@@ -137,9 +140,6 @@ export function nextBattle() {
     saveGameState();
 }
 
-
-   // ...（以降の関数は変更なし：initializeGodMode, restoreNormalMode, showCommandOptions, etc.）
-// プレイヤー状態を GOD モード用に初期化
 export function initializeGodMode() {
     // 元の状態を保存
     quizState.originalState = { ...quizState };
@@ -159,7 +159,6 @@ export function initializeGodMode() {
     saveGameState();
 }
 
-// プレイヤー状態を復元
 export function restoreNormalMode() {
     if (quizState.originalState) {
         Object.assign(quizState, quizState.originalState);
@@ -305,6 +304,11 @@ export function selectItemOrSpell(action) {
     } else if (action.startsWith('cast-')) {
         const spell = action.replace('cast-', '');
         console.log('Checking spell:', spell, 'Available spells:', quizState.spells);
+        // 修正：メニューを即座に閉じる
+        commandWindow.classList.remove('spell-menu');
+        commandWindow.innerHTML = '';
+        console.log('Spell menu closed:', !commandWindow.classList.contains('spell-menu'), 'Content:', commandWindow.innerHTML);
+
         if (quizState.spells.includes(spell)) {
             const spellConfig = config.spells[spell];
             const requiredLevel = spellConfig.requiredLevel;
@@ -314,7 +318,6 @@ export function selectItemOrSpell(action) {
                 typeMessage(`${quizState.name}のレベルが足りません！（必要レベル: ${requiredLevel}）`, message, () => {
                     quizState.isCommandPhase = true;
                     commandWindow.style.pointerEvents = 'auto';
-                    restoreQuizState();
                     showCommandOptions();
                 });
                 return;
@@ -328,7 +331,6 @@ export function selectItemOrSpell(action) {
                 typeMessage(`${quizState.name}のMPが足りません！`, message, () => {
                     quizState.isCommandPhase = true;
                     commandWindow.style.pointerEvents = 'auto';
-                    restoreQuizState();
                     showCommandOptions();
                 });
                 return;
@@ -337,17 +339,20 @@ export function selectItemOrSpell(action) {
             quizState.mp -= mpCost;
             const feedback = mpCost > 0 ? `\nMPが ${mpCost} 消費された！` : '';
 
+            // 修正：サウンドとエフェクトを非同期で実行
+            soundEffects.spell.play();
+            playSpellEffect(spell, effectLayer, battleScreen); // await を外す
+
             if (spell === 'ホイミ') {
                 const healAmount = Math.floor(Math.random() * (18 - 8 + 1)) + 8;
                 quizState.hp = Math.min(quizState.hp + healAmount, quizState.maxHp);
                 soundEffects.recover.play();
-                playSpellEffect(spell, effectLayer, battleScreen);
                 typeMessage(`${quizState.name}は ${spell}を となえた！${feedback}\nHPが ${healAmount} かいふくした！`, message, () => {
                     updateUI();
                     quizState.isCommandPhase = true;
                     commandWindow.style.pointerEvents = 'auto';
                     restoreQuizState();
-                    showCommandOptions();
+                    setTimeout(() => showCommandOptions(), 2000); // エフェクト終了後に表示
                 });
             } else if (spell === 'スカラ') {
                 const options = document.querySelectorAll('.dq3-option');
@@ -359,7 +364,6 @@ export function selectItemOrSpell(action) {
                     const optionIndex = parseInt(incorrectOptions[randomIndex].dataset.index, 10);
                     quizState.options[optionIndex].disabled = true;
                     quizState.sukaraCount++;
-                    playSpellEffect(spell, effectLayer, battleScreen);
                     const currentMessage = `${quizState.monster.name}の こうげき！！\n「${quizState.current?.item.meaning || ''}」は どれ？`;
                     const remainingOptions = Array.from(options).filter(opt => !opt.disabled).length;
                     let scalaMessage = `選択肢がひとつ消えた！`;
@@ -374,8 +378,7 @@ export function selectItemOrSpell(action) {
                     typeMessage(`${currentMessage}\n${quizState.name}は ${spell}を となえた！${feedback}\n${scalaMessage}`, message, () => {
                         updateUI();
                         quizState.isCommandPhase = false;
-                        commandWindow.style.pointerEvents = 'auto';
-                        showCommandOptions();
+                        setTimeout(() => showCommandOptions(), 2000); // エフェクト終了後に表示
                     });
                 } else {
                     typeMessage(`${quizState.name}は ${spell}を となえた！${feedback}\nこれ以上選択肢を減らせない！`, message, () => {
@@ -383,11 +386,10 @@ export function selectItemOrSpell(action) {
                         quizState.isCommandPhase = true;
                         commandWindow.style.pointerEvents = 'auto';
                         restoreQuizState();
-                        showCommandOptions();
+                        setTimeout(() => showCommandOptions(), 2000); // エフェクト終了後に表示
                     });
                 }
             } else {
-                playSpellEffect(spell, effectLayer, battleScreen);
                 let effectFeedback = '';
                 switch (spell) {
                     case 'ギガデイン':
@@ -417,11 +419,16 @@ export function selectItemOrSpell(action) {
                     quizState.isCommandPhase = true;
                     commandWindow.style.pointerEvents = 'auto';
                     restoreQuizState();
-                    showCommandOptions();
+                    if (spell === 'ルーラ') {
+                        showFieldScreen();
+                    } else {
+                        setTimeout(() => showCommandOptions(), 2000); // エフェクト終了後に表示
+                    }
                 });
             }
         } else {
             console.log('Spell not found:', spell);
+            showCommandOptions();
         }
     } else if (action === 'cancel-spell' || action === 'cancel-item') {
         cancelAction(action);

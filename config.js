@@ -1,6 +1,6 @@
 export const config = {
     // メッセージ表示速度（ミリ秒/文字）
-    messageSpeed: 20,
+    messageSpeed: 28,
     // 敵への攻撃時の揺れ幅（ピクセル）
     enemyShakeMagnitude: 10,
     // プレイヤーがダメージを受けた時の揺れ幅（ピクセル）
@@ -8,14 +8,21 @@ export const config = {
     // モンスター設定（レベルごとの追加モンスター）
     monsters: {
         1: [
-            { name: 'スライム', hpRange: [8, 14], exp: 22, attack: [1, 5], image: './images/zoma.png', bgm: './sounds/dq3-battle.mp3', weight: 0.4 },
-            { name: 'ドラキー', hpRange: [10, 14], exp: 40, attack: [1, 6], image: './images/zoma.png', bgm: './sounds/DQ2-battle.mp3', weight: 0.3 }
+            { name: 'スライム', hpRange: [8, 14], exp: 22, attack: [1, 5], image: './images/slime.png', weight: 0.4 },
+            { name: 'スライムベス', hpRange: [8, 14], exp: 22, attack: [1, 5], image: './images/slime-beth.png', weight: 0.4 },
+            { name: 'バブルスライム', hpRange: [8, 14], exp: 22, attack: [1, 5], image: './images/Bubble_slime.webp', weight: 0.4 },
+            { name: 'バラモス', hpRange: [8, 14], exp: 22, attack: [1, 5], image: './images/DQIII_-_Baramos_v.2.webp', weight: 0.4 },
+            { name: 'はぐれメタル', hpRange: [8, 14], exp: 300, attack: [1, 5], image: './images/Liquid_metal_slime.webp', weight: 0.4 },
+            { name: 'ドラキー', hpRange: [10, 14], exp: 40, attack: [1, 6], image: './images/drakey.png',weight: 0.3 }
         ],
         2: [
             // レベル2では新たなモンスターなし（スライム、ドラキーはレベル1から引き続き出現）
         ],
         3: [
-            { name: 'ゴーレム', hpRange: [20, 30], exp: 60, attack: [5, 10], image: './images/zoma.png', bgm: './sounds/04 Monsters.mp3', weight: 0.2 }
+            { name: 'スライムナイト', hpRange: [20, 30], exp: 60, attack: [5, 10], image: './images/Slime_knight.webp', bgm: './sounds/04 Monsters.mp3', weight: 0.2 },
+            { name: 'ゴースト', hpRange: [20, 30], exp: 60, attack: [5, 10], image: './images/ghost.png', bgm: './sounds/04 Monsters.mp3', weight: 0.2 },
+            { name: 'ベホマスライム', hpRange: [20, 30], exp: 60, attack: [5, 10], image: './images/behoma-slime.png', bgm: './sounds/04 Monsters.mp3', weight: 0.2 },
+            { name: 'キングスライム', hpRange: [20, 30], exp: 60, attack: [5, 10], image: './images/king-slime.png', bgm: './sounds/04 Monsters.mp3', weight: 0.2 }
         ],
         4: [
             { name: 'ゾーマ', hpRange: [50, 70], exp: 100, attack: [10, 15], image: './images/zoma.png', bgm: './sounds/zoma-bgm.mp3', weight: 0.1 }
