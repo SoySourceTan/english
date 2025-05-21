@@ -9,7 +9,7 @@ export const config = {
     monsters: {
         1: [
             { name: 'スライム', hpRange: [8, 14], exp: 22, attack: [1, 5], image: './images/slime.png', weight: 0.4 },
-            { name: 'スライムベス', hpRange: [8, 14], exp: 22, attack: [1, 5], image: './images/slime-beth.png', weight: 0.4 },
+            { name: 'ボストロール', hpRange: [8, 14], exp: 22, attack: [1, 5], image: './images/DQVIII_-_Boss_troll.webp', weight: 0.4 },
             { name: 'バブルスライム', hpRange: [8, 14], exp: 22, attack: [1, 5], image: './images/Bubble_slime.webp', weight: 0.4 },
             { name: 'バラモス', hpRange: [8, 14], exp: 22, attack: [1, 5], image: './images/DQIII_-_Baramos_v.2.webp', weight: 0.4 },
             { name: 'はぐれメタル', hpRange: [8, 14], exp: 300, attack: [1, 5], image: './images/Liquid_metal_slime.webp', weight: 0.4 },
