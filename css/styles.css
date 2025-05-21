@@ -25,6 +25,14 @@ body {
     margin-bottom: 1rem;
 }
 
+.dq3-window-monster {
+    background-color: #000961;
+    border: 4px solid #fff;
+    padding: 1rem;
+    margin-bottom: 1rem;
+}
+
+
 .dq3-screen {
     background: url('./images/battle-bg.png') no-repeat center/cover;
     min-height: 100vh;
@@ -41,16 +49,17 @@ body {
 }
 
 .monster-name-window {
-    height: 192px;
+/*    height: 192px;   */
 }
 
 .dq3-sprite {
-    width: 96px;
-    height: 96px;
+    width: 160px;
+    height: 160px;
     background-size: contain;
     background-repeat: no-repeat;
-    margin: 1rem auto;
+    margin: 0.2rem auto;
     animation: monster-wiggle 1s infinite;
+    background-position: center;
 }
 
 @keyframes monster-wiggle {
@@ -115,15 +124,15 @@ body {
 }
 
 .shake {
-    animation: shake 0.5s;
+    animation: dqShake 0.2s infinite;
 }
 
-@keyframes shake {
-    0%, 100% { transform: translate(0, 0); }
-    25% { transform: translate(var(--shake-x, -5px), var(--shake-y, 5px)); }
-    50% { transform: translate(var(--shake-x, 5px), var(--shake-y, -5px)); }
-    75% { transform: translate(var(--shake-x, -5px), var(--shake-y, 5px)); }
-    100% { transform: translate(0, 0); }
+@keyframes dqShake {
+    0% { transform: translate(1px, 0); }
+    25% { transform: translate(-2px, 2px); }
+    50% { transform: translate(2px, -1px); }
+    75% { transform: translate(-1px, -2px); }
+    100% { transform: translate(1px, 1px); }
 }
 
 .dq3-input {
@@ -148,8 +157,7 @@ body {
         font-size: 20px;
     }
     .dq3-sprite {
-        width: 64px;
-        height: 64px;
+        height: 120px;
     }
 }
 
@@ -275,8 +283,7 @@ body {
     left: 0;
     right: 0;
     margin: 0 auto;
-    max-width: 400px; /* フィールドウィンドウに合わせる */
-    max-height: 200px; /* 内部スクロール用 */
+    max-width: 100%; /* フィールドウィンドウに合わせる */
     overflow-y: auto; /* 呪文が多い場合にスクロール */
     z-index: 10; /* モンスターやクイズ選択肢の上に */
     opacity: 0.95; /* 視認性向上 */
@@ -380,9 +387,4 @@ body {
         padding: 0.5rem;
     }
 }
-
-
-
-
-
-
+#monster-name { display: none; }
