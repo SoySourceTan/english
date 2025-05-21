@@ -52,16 +52,22 @@ body {
 /*    height: 192px;   */
 }
 
+/* モンスター画像をボトムに配置 */
 .dq3-sprite {
     width: 160px;
     height: 160px;
     background-size: contain;
     background-repeat: no-repeat;
+    background-position: center bottom; /* モンスター画像をボトムに配置 */
     margin: 0.2rem auto;
     animation: monster-wiggle 1s infinite;
-    background-position: center;
 }
-
+/* 背景画像を battle-bg-4.png に変更し、中央配置 */
+.dq3-screen {
+    background: url('./images/battle-bg-4.png') no-repeat center/cover; /* 中央配置 */
+    min-height: 100vh;
+    position: relative;
+}
 @keyframes monster-wiggle {
     0%, 100% { transform: translateY(0); }
     50% { transform: translateY(-5px); }
@@ -83,7 +89,6 @@ body {
     background-color: #1e3a8a;
     border: 2px solid #fff;
     color: #f3f4f6;
-    font-family: 'VT323', monospace;
     font-size: 24px;
     text-align: left;
     transition: background-color 0.2s;
@@ -139,8 +144,6 @@ body {
     background-color: #fff;
     color: #000;
     border: 2px solid #1e3a8a;
-    font-family: 'VT323', monospace;
-    font-size: 24px;
     padding: 0.5rem;
 }
 
