@@ -21,7 +21,7 @@ export const config = {
         3: [
             { name: 'スライムナイト', hpRange: [20, 30], exp: 60, attack: [5, 10], image: './images/Slime_knight.webp', bgm: './sounds/04 Monsters.mp3', weight: 0.2 },
             { name: 'ゴースト', hpRange: [20, 30], exp: 60, attack: [5, 10], image: './images/ghost.png', bgm: './sounds/04 Monsters.mp3', weight: 0.2 },
-            { name: 'ベホマスライム', hpRange: [20, 30], exp: 60, attack: [5, 10], image: './images/behoma-slime.png', bgm: './sounds/04 Monsters.mp3', weight: 0.2 },
+            { name: 'ベホマスライム', hpRange: [20, 30], exp: 60, attack: [5, 10], image: './images/DQVIII_-_Cureslime.webp', bgm: './sounds/04 Monsters.mp3', weight: 0.2 },
             { name: 'キングスライム', hpRange: [20, 30], exp: 60, attack: [5, 10], image: './images/king-slime.png', bgm: './sounds/04 Monsters.mp3', weight: 0.2 }
         ],
         4: [
