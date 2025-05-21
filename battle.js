@@ -51,11 +51,10 @@ function weightedRandom(items, weights) {
 }
 
 export function nextBattle() {
+    console.log('Starting nextBattle, godMode:', quizState.godMode, 'godModeBoss:', quizState.godModeBoss);
     let selectedMonster;
 
-    // GOD モードの場合
     if (quizState.godMode && quizState.godModeBoss) {
-        // 全モンスターから選択したモンスターを検索
         for (const level in config.monsters) {
             const monster = config.monsters[level].find(m => m.name === quizState.godModeBoss);
             if (monster) {
@@ -64,7 +63,6 @@ export function nextBattle() {
             }
         }
     } else {
-        // 通常モード：レベル1から現在のレベルまでの全モンスターを収集
         const availableMonsters = [];
         const weights = [];
         for (let level = 1; level <= quizState.level; level++) {
@@ -75,13 +73,16 @@ export function nextBattle() {
                 });
             }
         }
-        // フォールバック：モンスターがない場合はレベル1を使用
         if (availableMonsters.length === 0) {
             availableMonsters.push(...(config.monsters[1] || []));
             weights.push(...availableMonsters.map(() => 1));
         }
-        // 重み付きランダムでモンスターを選択
         selectedMonster = weightedRandom(availableMonsters, weights);
+    }
+
+    if (!selectedMonster) {
+        console.error('No monster selected, falling back to default');
+        selectedMonster = config.monsters[1][0];
     }
 
     const [minHp, maxHp] = selectedMonster.hpRange;
@@ -164,12 +165,12 @@ export function restoreNormalMode() {
         Object.assign(quizState, quizState.originalState);
         quizState.godMode = false;
         quizState.godModeBoss = null;
+        quizState.monster = null;
         quizState.originalState = null;
         updateUI();
         saveGameState();
     }
 }
-
 export function showCommandOptions() {
     const commandWindow = document.getElementById('command-window');
     commandWindow.classList.remove('spell-menu');
@@ -247,7 +248,7 @@ function restoreQuizState() {
                         data-index="${index}" 
                         data-is-correct="${option.word === quizState.current.item.word}" 
                         ${option.disabled ? 'disabled' : ''}>
-                    <span class="option-text">${option.word}</span>
+                    <span class="option-text fs-2 py-0">${option.word}</span>
                 </button>
             </div>
         `).join('');

@@ -107,7 +107,7 @@ export function showQuizOptions() {
             ${optionsList.map((option, index) => `
                 <div class="col-6">
                     <button class="dq3-option btn w-100" data-index="${index}" data-is-correct="${option.word === adaptedItem.word}">
-                        <span class="option-text">${option.word}</span>
+                        <span class="option-text py-0 fs-3">${option.word}</span>
                     </button>
                 </div>
             `).join('')}

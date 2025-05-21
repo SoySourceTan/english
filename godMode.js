@@ -8,6 +8,7 @@ import { loadWordData } from './quiz.js';
 async function startGodModeAdventure(bossName) {
     await loadWordData();
     quizState.godModeBoss = bossName;
+    quizState.monster = null; // 現在のモンスターをクリア
     initializeGodMode();
     document.getElementById('god-mode-menu').classList.add('hidden');
     document.getElementById('start-screen')?.classList.add('hidden');

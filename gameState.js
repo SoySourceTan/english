@@ -1,4 +1,3 @@
-// プレイヤー状態の初期状態
 export const quizState = {
     name: 'ゆうしゃ',
     job: 'warrior',
@@ -17,10 +16,11 @@ export const quizState = {
     items: ['やくそう', 'まほうのせいすい'],
     spells: ['ホイミ', 'スカラ', 'ギガデイン', 'メラ', 'ギラ', 'バギ', 'ヒャド', 'レムオム', 'ルーラ'],
     isMonsterDefeated: false,
-    sukaraCount: 0 // スカラの使用回数を追加
+    sukaraCount: 0,
+    godMode: false, // God Mode フラグを追加
+    godModeBoss: null // God Mode ボスを追加
 };
 
-// プレイヤー状態の保存
 export function saveGameState() {
     const stateToSave = {
         name: quizState.name,
@@ -36,13 +36,14 @@ export function saveGameState() {
         items: quizState.items,
         spells: quizState.spells,
         score: quizState.score,
-        sukaraCount: quizState.sukaraCount // スカラの使用回数を保存
+        sukaraCount: quizState.sukaraCount,
+        godMode: quizState.godMode, // 保存
+        godModeBoss: quizState.godModeBoss // 保存
     };
     localStorage.setItem('gameState', JSON.stringify(stateToSave));
     console.log('Game state saved:', stateToSave);
 }
 
-// プレイヤー状態の読み込み
 export function loadGameState() {
     const savedState = localStorage.getItem('gameState');
     if (savedState) {
@@ -57,17 +58,18 @@ export function loadGameState() {
         quizState.exp = parsedState.exp;
         quizState.expToNextLevel = parsedState.expToNextLevel;
         quizState.title = parsedState.title || '初心者';
-        quizState.items = parsedState.items || ['やくそう', 'まほうのせいすい']; // デフォルトにまほうのせいすいを追加
+        quizState.items = parsedState.items || ['やくそう', 'まほうのせいすい'];
         quizState.spells = parsedState.spells || ['ホイミ', 'スカラ', 'ギガデイン', 'メラ', 'ギラ', 'バギ', 'ヒャド', 'レムオム', 'ルーラ'];
         quizState.score = parsedState.score || 0;
-        quizState.sukaraCount = parsedState.sukaraCount || 0; // スカラの使用回数を読み込み
+        quizState.sukaraCount = parsedState.sukaraCount || 0;
+        quizState.godMode = parsedState.godMode || false; // 読み込み
+        quizState.godModeBoss = parsedState.godModeBoss || null; // 読み込み
         console.log('Game state loaded:', parsedState);
         return true;
     }
     return false;
 }
 
-// プレイヤー状態のリセット
 export function resetGameState() {
     quizState.name = 'ゆうしゃ';
     quizState.job = 'warrior';
@@ -83,9 +85,11 @@ export function resetGameState() {
     quizState.monster = null;
     quizState.isCommandPhase = true;
     quizState.currentAction = null;
-    quizState.items = ['やくそう', 'まほうのせいすい']; // まほうのせいすいを追加
+    quizState.items = ['やくそう', 'まほうのせいすい'];
     quizState.spells = ['ホイミ', 'スカラ', 'ギガデイン', 'メラ', 'ギラ', 'バギ', 'ヒャド', 'レムオム', 'ルーラ'];
     quizState.isMonsterDefeated = false;
-    quizState.sukaraCount = 0; // スカラの使用回数を初期化
+    quizState.sukaraCount = 0;
+    quizState.godMode = false; // リセット
+    quizState.godModeBoss = null; // リセット
     console.log('Game state reset to initial values');
 }
