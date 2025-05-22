@@ -33,11 +33,12 @@ export const config = {
         10: [
             { name: 'バラモス', hpRange: [20, 30], exp: 82, attack: [31, 50], image: './images/DQIII_-_Baramos_v.2.webp', bgm: './sounds/battle-bgm.mp3', weight: 0.4 },
             { name: 'エスターク', hpRange: [20, 30], exp: 80, attack: [35, 40], image: './images/DQIVDS_-_Estark.webp', bgm: './sounds/04 Monsters.mp3', weight: 0.2 },
-            { name: 'ハーゴン', hpRange: [20, 30], exp: 80, attack: [35, 50], image: './images/DQII_-_Hargon.webp', bgm: './sounds/DQ2-boss.mp3', weight: 0.2 },
-        ]
+            { name: 'ハーゴン', hpRange: [20, 30], exp: 80, attack: [35, 50], image: './images/DQII_-_Hargon.webp', bgm: './sounds/DQ2-boss.mp3', weight: 0.2 }
+        ],
         20: [
             { name: 'ミルドラース', hpRange: [20, 30], exp: 80, attack: [33, 40], image: './images/DQMJ_-_Malroth.webp', bgm: './sounds/27 Monsters.mp3', weight: 0.2 },
             { name: 'ダークドレアム', hpRange: [20, 30], exp: 80, attack: [35, 40], image: './images/dark-dreum.webp', bgm: './sounds/27 Monsters.mp3', weight: 0.2 },
+            { name: 'ハーゴン', hpRange: [20, 30], exp: 80, attack: [35, 50], image: './images/DQII_-_Hargon.webp', bgm: './sounds/DQ2-boss.mp3', weight: 0.2 },
             { name: 'ゾーマ', hpRange: [20, 70], exp: 100, attack: [30, 45], image: './images/DQIII_-_Zoma.webp', bgm: './sounds/40 Heros Challenge.mp3', weight: 0.2 }
         ]
     },
