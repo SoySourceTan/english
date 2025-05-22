@@ -6,10 +6,17 @@
     <title>ドラクエ英単語</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.134.0/examples/js/postprocessing/EffectComposer.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.134.0/examples/js/postprocessing/RenderPass.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.134.0/examples/js/postprocessing/ShaderPass.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.134.0/examples/js/postprocessing/UnrealBloomPass.js"></script> <!-- ブルーム -->
+    <script src="https://cdn.jsdelivr.net/npm/three@0.134.0/examples/js/shaders/CopyShader.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.134.0/examples/js/shaders/LuminosityHighPassShader.js"></script> <!-- ブルーム用 -->
     <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
     <link href="./css/styles.css" rel="stylesheet">
 </head>
+
 <body class="bg-black text-gray-100 font-pixel dq3-body">
     <audio id="attack-sound" src="./sounds/attack.mp3" preload="auto"></audio>
     <audio id="click-sound" src="./sounds/click.mp3" preload="auto"></audio>
@@ -39,9 +46,11 @@
     <header class="sticky top-0 z-50 bg-dq-blue border-dq p-2 shadow-dq">
         <div class="container-fluid">
             <div class="row align-items-center">
-                <div class="col-12 col-sm-6">
+                <div class="col-12 col-sm-6" id="sound-control">
                     <span id="player-name" class="fs-6">SirNoob</span>
                     <span id="player-job" class="fs-6 ms-3 dq3-clickable">Newbie</span>
+                    <button id="bgm-toggle" class="btn btn-light">BGM: ON</button>
+                    <button id="se-toggle" class="btn btn-light">SE: ON</button>
                 </div>
                 <div class="col-12 col-sm-6 mt-0 mt-sm-0">
                     <div class="d-flex align-items-center gap-3 flex-wrap">
@@ -54,6 +63,8 @@
             </div>
         </div>
     </header>
+
+
 
     <main class="container-m p-0 dq3-main">
         <!-- 開始画面 -->

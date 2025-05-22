@@ -140,22 +140,25 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    document.getElementById('quiz-options').addEventListener('click', (e) => {
-        const btn = e.target.closest('button');
-        console.log('Quiz options clicked, btn:', btn, 'isCommandPhase:', quizState.isCommandPhase, 'event target:', e.target);
+document.getElementById('quiz-options').addEventListener('click', (e) => {
+    const btn = e.target.closest('button.dq3-option');
+    if (!btn) {
+        console.log('Quiz options clicked, but no valid button found:', e.target);
+        return;
+    }
+    console.log('Quiz options clicked, btn:', btn, 'isCommandPhase:', quizState.isCommandPhase);
 
-        if (quizState.isMonsterDefeated) {
-            e.stopPropagation();
-            return;
-        }
+    if (quizState.isMonsterDefeated || btn.disabled) {
+        console.log('Action ignored: Monster defeated or button disabled');
+        e.stopPropagation();
+        return;
+    }
 
-        if (!btn || btn.disabled) return;
-
-        soundEffects.buttonClick.play();
-        const index = parseInt(btn.dataset.index, 10);
-        console.log('Quiz option selected, index:', index);
-        checkAnswer(index);
-    });
+    soundEffects.buttonClick.play();
+    const index = parseInt(btn.dataset.index, 10);
+    console.log('Quiz option selected, index:', index);
+    checkAnswer(index);
+});
 
     document.getElementById('field-options').addEventListener('click', (e) => {
         const btn = e.target.closest('.dq3-btn');
@@ -164,4 +167,57 @@ document.addEventListener('DOMContentLoaded', () => {
             handleFieldChoice(btn.dataset.action);
         }
     });
+
+    // 音声制御の初期化
+    function updateSoundControlUI() {
+        const bgmToggle = document.getElementById('bgm-toggle');
+        const seToggle = document.getElementById('se-toggle');
+        if (bgmToggle) {
+            bgmToggle.textContent = quizState.isBgmMuted ? 'BGM: OFF' : 'BGM: ON';
+        }
+        if (seToggle) {
+            seToggle.textContent = quizState.isSeMuted ? 'SE: OFF' : 'SE: ON';
+        }
+        console.log('Sound control UI updated:', { isBgmMuted: quizState.isBgmMuted, isSeMuted: quizState.isSeMuted });
+    }
+
+    // BGMの制御
+    function toggleBgm() {
+        quizState.isBgmMuted = !quizState.isBgmMuted;
+        if (soundEffects.battleBgm) {
+            soundEffects.battleBgm.mute(quizState.isBgmMuted);
+            console.log('BGM toggled, mute status:', quizState.isBgmMuted);
+        }
+        updateSoundControlUI();
+        saveGameState();
+    }
+
+    // SEの制御
+    function toggleSe() {
+        quizState.isSeMuted = !quizState.isSeMuted;
+        Object.values(soundEffects).forEach(sound => {
+            if (sound instanceof Howl && sound !== soundEffects.battleBgm) {
+                sound.mute(quizState.isSeMuted);
+            }
+        });
+        console.log('SE toggled, mute status:', quizState.isSeMuted);
+        updateSoundControlUI();
+        saveGameState();
+    }
+
+    // 音声制御ボタンのイベントリスナー
+    document.getElementById('sound-control').addEventListener('click', (e) => {
+        const bgmToggle = e.target.closest('#bgm-toggle');
+        const seToggle = e.target.closest('#se-toggle');
+        if (bgmToggle) {
+            if (!quizState.isSeMuted) soundEffects.buttonClick.play();
+            toggleBgm();
+        } else if (seToggle) {
+            if (!quizState.isSeMuted) soundEffects.buttonClick.play();
+            toggleSe();
+        }
+    });
+
+    // 初期化時にUIを更新
+    updateSoundControlUI();
 });

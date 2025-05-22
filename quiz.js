@@ -32,6 +32,7 @@ export function typeMessage(text, element, callback, wait = false) {
     console.log('Displaying message:', text);
     element.textContent = '';
     element.style.pointerEvents = 'auto';
+    element.classList.remove('blinking-cursor'); // 初期化
     let i = 0;
 
     function type() {
@@ -41,21 +42,16 @@ export function typeMessage(text, element, callback, wait = false) {
             setTimeout(type, config.messageSpeed);
         } else if (wait) {
             element.textContent += '_';
+            element.classList.add('blinking-cursor'); // 点滅開始
             const handleClick = () => {
                 console.log('Message clicked');
+                element.classList.remove('blinking-cursor');
+                element.textContent = element.textContent.replace('_', '');
                 element.removeEventListener('click', handleClick);
                 element.style.pointerEvents = 'none';
                 if (callback) callback();
             };
             element.addEventListener('click', handleClick, { once: true });
-            setTimeout(() => {
-                if (element.textContent.endsWith('_')) {
-                    console.log('Message timeout, proceeding');
-                    element.textContent = element.textContent.replace('_', '');
-                    element.style.pointerEvents = 'none';
-                    if (callback) callback();
-                }
-            }, 5000);
         } else if (callback) {
             setTimeout(() => {
                 console.log('Message typing complete, executing callback');
@@ -115,4 +111,7 @@ export function showQuizOptions() {
     `;
     typeMessage(`${quizState.monster.name}の こうげき！！\n「${adaptedItem.meaning}」は どれ？`, message);
     console.log('Quiz options rendered, Category:', randomCategory, 'Items:', items);
+    console.log('showQuizOptions called, wordData:', wordData, 'categories:', categories);
+console.log('Selected category:', randomCategory, 'items:', items);
+console.log('Quiz state after generation, current:', quizState.current, 'options:', quizState.options);
 }

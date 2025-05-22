@@ -26,7 +26,7 @@ export const soundEffects = {
     attack: new Howl({ src: ['./sounds/attack.mp3'], volume: 0.5 }),
     eneattack: new Howl({ src: ['./sounds/eneattack.mp3'], volume: 0.5 }),
     lvup: new Howl({ src: ['./sounds/lvup.mp3'], volume: 0.5 }),
-    pattack: new Howl({ src: ['./sounds/pattack.mp3'], volume: 0.5 }),
+    pattack: new Howl({ src: ['./sounds/attack.mp3'], volume: 0.5 }),
     spell: new Howl({ src: ['./sounds/spell.mp3'], volume: 0.5 }),
     recover: new Howl({ src: ['./sounds/recover.mp3'], volume: 0.5 }),
     win: new Howl({ src: ['./sounds/win.mp3'], volume: 0.5 }),

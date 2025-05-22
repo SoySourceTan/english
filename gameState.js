@@ -1,3 +1,4 @@
+// gameState.js
 export const quizState = {
     name: 'ゆうしゃ',
     job: 'warrior',
@@ -17,8 +18,13 @@ export const quizState = {
     spells: ['ホイミ', 'スカラ', 'ギガデイン', 'メラ', 'ギラ', 'バギ', 'ヒャド', 'レムオム', 'ルーラ'],
     isMonsterDefeated: false,
     sukaraCount: 0,
-    godMode: false, // God Mode フラグを追加
-    godModeBoss: null // God Mode ボスを追加
+    godMode: false,
+    godModeBoss: null,
+    originalState: null,
+    isWaitingForClick: false,
+    nextCallback: null,
+    isBgmMuted: false,
+    isSeMuted: false
 };
 
 export function saveGameState() {
@@ -37,8 +43,10 @@ export function saveGameState() {
         spells: quizState.spells,
         score: quizState.score,
         sukaraCount: quizState.sukaraCount,
-        godMode: quizState.godMode, // 保存
-        godModeBoss: quizState.godModeBoss // 保存
+        godMode: quizState.godMode,
+        godModeBoss: quizState.godModeBoss,
+        isBgmMuted: quizState.isBgmMuted, // 追加
+        isSeMuted: quizState.isSeMuted // 追加
     };
     localStorage.setItem('gameState', JSON.stringify(stateToSave));
     console.log('Game state saved:', stateToSave);
@@ -62,8 +70,10 @@ export function loadGameState() {
         quizState.spells = parsedState.spells || ['ホイミ', 'スカラ', 'ギガデイン', 'メラ', 'ギラ', 'バギ', 'ヒャド', 'レムオム', 'ルーラ'];
         quizState.score = parsedState.score || 0;
         quizState.sukaraCount = parsedState.sukaraCount || 0;
-        quizState.godMode = parsedState.godMode || false; // 読み込み
-        quizState.godModeBoss = parsedState.godModeBoss || null; // 読み込み
+        quizState.godMode = parsedState.godMode || false;
+        quizState.godModeBoss = parsedState.godModeBoss || null;
+        quizState.isBgmMuted = parsedState.isBgmMuted || false; // 追加
+        quizState.isSeMuted = parsedState.isSeMuted || false; // 追加
         console.log('Game state loaded:', parsedState);
         return true;
     }
@@ -89,7 +99,11 @@ export function resetGameState() {
     quizState.spells = ['ホイミ', 'スカラ', 'ギガデイン', 'メラ', 'ギラ', 'バギ', 'ヒャド', 'レムオム', 'ルーラ'];
     quizState.isMonsterDefeated = false;
     quizState.sukaraCount = 0;
-    quizState.godMode = false; // リセット
-    quizState.godModeBoss = null; // リセット
+    quizState.godMode = false;
+    quizState.godModeBoss = null;
+    quizState.isWaitingForClick = false;
+    quizState.nextCallback = null;
+    quizState.isBgmMuted = false; // リセット
+    quizState.isSeMuted = false; // リセット
     console.log('Game state reset to initial values');
 }
