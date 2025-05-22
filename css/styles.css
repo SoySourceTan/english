@@ -326,7 +326,6 @@ body {
     outline: 2px solid #fff;
     outline-offset: 2px;
 }
-
 @media (max-width: 576px) {
     .dq3-select {
         font-size: 20px;
@@ -350,20 +349,7 @@ body {
     opacity: 0.95;
 }
 
-.dq3-select {
-    background-color: #1e3a8a;
-    border: 2px solid #fff;
-    color: #f3f4f6;
-    font-family: 'VT323', monospace;
-    font-size: 24px;
-    padding: 0.5rem;
-    width: 100%;
-}
 
-.dq3-select:focus {
-    outline: 2px solid #fff;
-    outline-offset: 2px;
-}
 
 .dq3-clickable {
     cursor: pointer;
@@ -391,3 +377,45 @@ body {
     }
 }
 #monster-name { display: none; }
+
+/* styles.css: 末尾に追加 */
+#sound-control {
+    background-color: #1e3a8a; /* dq3-window と一致 */
+}
+#sound-control .dq3-btn {
+    font-family: 'VT323', monospace;
+    background-color: #1e3a8a; /* dq3-btn と一致 */
+    color: #f3f4f6; /* dq3-btn と一致 */
+}
+#sound-control .dq3-btn:hover {
+    background-color: #e1e1e1; /* dq3-btn:hover と一致 */
+}
+
+
+.option-text {
+    font-family: 'monospace';
+
+}
+.blinking-cursor::after {
+    content: '_';
+    animation: blink 0.5s step-end infinite;
+}
+
+@keyframes blink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0; }
+}
+
+
+/* ドラクエ風の点滅カーソル */
+.blinking-cursor::after {
+    content: '_';
+    animation: blink 0.5s step-end infinite;
+}
+@keyframes blink {
+    0% { opacity: 1; }
+    50% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+
