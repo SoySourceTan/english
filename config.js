@@ -17,6 +17,7 @@ export const config = {
         2: [
             { name: 'はぐれメタル', hpRange: [8, 14], exp: 32, attack: [5, 12], image: './images/Liquid_metal_slime.webp', bgm: './sounds/battle-bgm.mp3', weight: 0.4 },
             { name: 'メタルスライム', hpRange: [8, 14], exp: 32, attack: [1, 5], image: './images/Metal_slime.webp', bgm: './sounds/04 Monsters.mp3', weight: 0.4 },
+            { name: 'ベビーサタン', hpRange: [8, 14], exp: 32, attack: [1, 5], image: './images/DQVIII_-_Imp.webp', bgm: './sounds/04 Monsters.mp3', weight: 0.4 },
             { name: 'さまようよろい', hpRange: [8, 14], exp: 32, attack: [1, 5], image: './images/DQVIII_-_Restless_armour.webp', bgm: './sounds/04 Monsters.mp3', weight: 0.4 }
         ],
         3: [
