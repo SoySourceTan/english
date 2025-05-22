@@ -22,7 +22,7 @@ export const config = {
             { name: 'スライムナイト', hpRange: [20, 30], exp: 60, attack: [5, 10], image: './images/Slime_knight.webp', bgm: './sounds/04 Monsters.mp3', weight: 0.2 },
             { name: 'ベホマスライム', hpRange: [20, 30], exp: 60, attack: [5, 10], image: './images/DQVIII_-_Cureslime.webp', bgm: './sounds/04 Monsters.mp3', weight: 0.2 },
             { name: 'ゴースト', hpRange: [20, 30], exp: 60, attack: [5, 10], image: './images/ghost.png', bgm: './sounds/04 Monsters.mp3', weight: 0.2 },
-            { name: 'さまようよろい', hpRange: [20, 33], exp: 22, attack: [15, 20], image: './images/DQVIII_-_Restless_armour.webp', bgm: './sounds/40 Hero's Challenge.mp3', weight: 0.4 },
+            { name: 'さまようよろい', hpRange: [20, 33], exp: 22, attack: [15, 20], image: './images/DQVIII_-_Restless_armour.webp', bgm: './sounds/40 Heros Challenge.mp3', weight: 0.4 },
             { name: 'キラーマシーン', hpRange: [20, 30], exp: 60, attack: [20, 30], image: './images/DQVIII_-_Killing_machine.webp', bgm: './sounds/04 Monsters.mp3', weight: 0.2 },
             { name: 'ボストロール', hpRange: [20, 30], exp: 60, attack: [20, 30], image: './images/DQVIII_-_Boss_troll.webp', bgm: './sounds/04 Monsters.mp3', weight: 0.2 },
             { name: 'ドラゴン', hpRange: [20, 30], exp: 60, attack: [22, 26], image: './images/Green_dragon.webp', bgm: './sounds/04 Monsters.mp3', weight: 0.2 },
