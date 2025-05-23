@@ -32,7 +32,6 @@ export function showInitialScreen() {
         <div class="d-grid gap-2">
             <button id="newGame" class="dq3-btn btn">はじめから</button>
             <button id="loadGame" class="dq3-btn btn">ぼうけんのしょ</button>
-            <img class="img-fluid w-50" src="./images/qr.png">
         </div>
     `;
     // 機能: 初期画面表示 - 終了
