@@ -26,9 +26,6 @@ body {
 }
 
 .dq3-window-monster {
-    background-color: #000961;
-    border: 4px solid #fff;
-    padding: 1rem;
     margin-bottom: 1rem;
 }
 
@@ -54,8 +51,7 @@ body {
 
 /* モンスター画像をボトムに配置 */
 .dq3-sprite {
-    width: 160px;
-    height: 160px;
+    height: 40vh;
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center bottom; /* モンスター画像をボトムに配置 */
@@ -160,7 +156,7 @@ body {
         font-size: 20px;
     }
     .dq3-sprite {
-        height: 120px;
+        height: 30vh;
     }
 }
 
