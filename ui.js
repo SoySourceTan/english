@@ -28,7 +28,7 @@ export function showInitialScreen() {
     const startScreen = document.getElementById('start-screen');
     startScreen.classList.remove('hidden');
     startScreen.innerHTML = `
-        <h1 class="fs-4 mb-4">冒険をはじめる</h1>
+        <h1 class="fs-2 mb-4">冒険をはじめる</h1>
         <div class="d-grid gap-2">
             <button id="newGame" class="dq3-btn btn">はじめから</button>
             <button id="loadGame" class="dq3-btn btn">ぼうけんのしょ</button>
@@ -41,7 +41,7 @@ export function showCharacterCreation() {
     // 機能: キャラクター作成画面表示 - 開始
     const startScreen = document.getElementById('start-screen');
     startScreen.innerHTML = `
-        <h1 class="fs-4 mb-4">冒険をはじめる</h1>
+        <h1 class="fs-2 mb-4">冒険をはじめる</h1>
         <div class="d-flex flex-column gap-3">
             <input id="nameInput" class="dq3-input form-control" type="text" placeholder="名前を入力" aria-label="名前" value="ゆうしゃ">
             <select id="jobSelect" class="dq3-input form-select">
