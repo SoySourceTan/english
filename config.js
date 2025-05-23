@@ -12,7 +12,7 @@ export const config = {
             { name: 'スライムベス', hpRange: [8, 14], exp: 22, attack: [4, 7], image: './images/DQVIII_-_She-slime.webp', bgm: './sounds/DQ1-battle.mp3', weight: 0.4 },
             { name: 'バブルスライム', hpRange: [8, 14], exp: 22, attack: [5, 7], image: './images/Bubble_slime.webp', bgm: './sounds/dq3-battle.mp3', weight: 0.4 },
             { name: 'ゴースト', hpRange: [20, 30], exp: 60, attack: [5, 10], image: './images/ghost.webp', bgm: './sounds/DQ2-battle.mp3', weight: 0.2 },
-            { name: 'ドラキー', hpRange: [10, 14], exp: 22, attack: [3, 8], image: './images/drakey.png', bgm: './sounds/DQ2-battle.mp3', weight: 0.4 }
+            { name: 'ドラキー', hpRange: [10, 14], exp: 22, attack: [3, 8], image: './images/DQVIII_-_Dracky.webp', bgm: './sounds/DQ2-battle.mp3', weight: 0.4 }
         ],
         2: [
             { name: 'はぐれメタル', hpRange: [8, 14], exp: 32, attack: [5, 12], image: './images/Liquid_metal_slime.webp', bgm: './sounds/battle-bgm.mp3', weight: 0.4 },
@@ -52,9 +52,25 @@ export const config = {
     titles: {
         1: '初心者',
         2: '脱初心者',
-        5: '冒険者',
-        10: '勇者',
-        20: '伝説'
+        3: 'みならい',
+        4: '練習生',
+        5: '候補生',
+        6: '平社員',
+        7: '部門担当',
+        8: '部門長',
+        9: '係長',
+        10: '課長補佐',
+        11: '課長',
+        12: '部長補佐',
+        13: '部長',
+        14: '本部長',
+        15: '常務補佐',
+        16: '常務',
+        17: '専務補佐',
+        18: '専務',
+        19: '副社長',
+        20: '社長',
+        21: '会長'
     },
     spells: {
         'ホイミ': { requiredLevel: 1, mpCost: 5 },
