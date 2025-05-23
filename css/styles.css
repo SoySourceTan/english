@@ -393,8 +393,8 @@ body {
 
 }
 .blinking-cursor::after {
-    content: '_';
-    animation: blink 0.5s step-end infinite;
+    content: '(クリックで続ける)';
+    animation: blink 0.7s step-end infinite;
 }
 
 @keyframes blink {
@@ -405,8 +405,8 @@ body {
 
 /* ドラクエ風の点滅カーソル */
 .blinking-cursor::after {
-    content: '_';
-    animation: blink 0.5s step-end infinite;
+    content: '(クリックで続ける)';
+    animation: blink 0.7s step-end infinite;
 }
 @keyframes blink {
     0% { opacity: 1; }
