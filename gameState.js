@@ -24,7 +24,10 @@ export const quizState = {
     isWaitingForClick: false,
     nextCallback: null,
     isBgmMuted: false,
-    isSeMuted: false
+    isSeMuted: false,
+    recentWords: [], // 追加：直近の単語履歴
+    current: null,   // 追加：現在のクイズ情報
+    options: []      // 追加：クイズの選択肢
 };
 
 export function saveGameState() {
@@ -45,8 +48,9 @@ export function saveGameState() {
         sukaraCount: quizState.sukaraCount,
         godMode: quizState.godMode,
         godModeBoss: quizState.godModeBoss,
-        isBgmMuted: quizState.isBgmMuted, // 追加
-        isSeMuted: quizState.isSeMuted // 追加
+        isBgmMuted: quizState.isBgmMuted,
+        isSeMuted: quizState.isSeMuted,
+        recentWords: quizState.recentWords // 追加
     };
     localStorage.setItem('gameState', JSON.stringify(stateToSave));
     console.log('Game state saved:', stateToSave);
@@ -56,15 +60,15 @@ export function loadGameState() {
     const savedState = localStorage.getItem('gameState');
     if (savedState) {
         const parsedState = JSON.parse(savedState);
-        quizState.name = parsedState.name;
-        quizState.job = parsedState.job;
-        quizState.level = parsedState.level;
-        quizState.hp = parsedState.hp;
-        quizState.maxHp = parsedState.maxHp;
+        quizState.name = parsedState.name || 'ゆうしゃ';
+        quizState.job = parsedState.job || 'warrior';
+        quizState.level = parsedState.level || 1;
+        quizState.hp = parsedState.hp || 30;
+        quizState.maxHp = parsedState.maxHp || 30;
         quizState.mp = parsedState.mp || 50;
         quizState.maxMp = parsedState.maxMp || 50;
-        quizState.exp = parsedState.exp;
-        quizState.expToNextLevel = parsedState.expToNextLevel;
+        quizState.exp = parsedState.exp || 0;
+        quizState.expToNextLevel = parsedState.expToNextLevel || 100;
         quizState.title = parsedState.title || '初心者';
         quizState.items = parsedState.items || ['やくそう', 'まほうのせいすい'];
         quizState.spells = parsedState.spells || ['ホイミ', 'スカラ', 'ギガデイン', 'メラ', 'ギラ', 'バギ', 'ヒャド', 'レムオム', 'ルーラ'];
@@ -72,8 +76,11 @@ export function loadGameState() {
         quizState.sukaraCount = parsedState.sukaraCount || 0;
         quizState.godMode = parsedState.godMode || false;
         quizState.godModeBoss = parsedState.godModeBoss || null;
-        quizState.isBgmMuted = parsedState.isBgmMuted || false; // 追加
-        quizState.isSeMuted = parsedState.isSeMuted || false; // 追加
+        quizState.isBgmMuted = parsedState.isBgmMuted || false;
+        quizState.isSeMuted = parsedState.isSeMuted || false;
+        quizState.recentWords = parsedState.recentWords || []; // 追加
+        quizState.current = parsedState.current || null;       // 追加
+        quizState.options = parsedState.options || [];         // 追加
         console.log('Game state loaded:', parsedState);
         return true;
     }
@@ -103,7 +110,10 @@ export function resetGameState() {
     quizState.godModeBoss = null;
     quizState.isWaitingForClick = false;
     quizState.nextCallback = null;
-    quizState.isBgmMuted = false; // リセット
-    quizState.isSeMuted = false; // リセット
+    quizState.isBgmMuted = false;
+    quizState.isSeMuted = false;
+    quizState.recentWords = []; // 追加
+    quizState.current = null;   // 追加
+    quizState.options = [];     // 追加
     console.log('Game state reset to initial values');
 }

@@ -171,6 +171,7 @@ export function restoreNormalMode() {
         saveGameState();
     }
 }
+
 export function showCommandOptions() {
     const commandWindow = document.getElementById('command-window');
     commandWindow.classList.remove('spell-menu');
@@ -217,7 +218,7 @@ export function executeAction(action) {
     if (action === 'fight') {
         quizState.isCommandPhase = false;
         if (quizState.current) {
-            typeMessage(`${quizState.monster.name}の こうげき！！\n「${quizState.current.item.meaning}」は どれ？\n問題に答えろ！`, message);
+            typeMessage(`${quizState.monster.name}の こうげき！！\n「${quizState.current.item.meaning}」は どれ？`, message);
         } else {
             showQuizOptions();
         }
@@ -497,7 +498,7 @@ export function checkAnswer(index) {
     }
 
     const selectedOption = quizState.options[index];
-    const isCorrect = selectedOption.word === quizState.current.item.word;
+    const isCorrect = quizState.current.correctAnswers.some(ans => ans.word === selectedOption.word);
     const feedback = document.getElementById('battle-feedback');
     document.querySelectorAll('.dq3-option').forEach(btn => btn.disabled = true);
 
@@ -562,7 +563,6 @@ export function checkAnswer(index) {
             typeMessage(`${quizState.name}は ${damage} のダメージを受けた`, feedback, () => {
                 updateUI();
                 if (quizState.hp <= 0) {
-                    // BGM停止
                     if (soundEffects.battleBgm) {
                         soundEffects.battleBgm.stop();
                         soundEffects.battleBgm = null;
@@ -570,17 +570,25 @@ export function checkAnswer(index) {
                     }
                     showReviveScreen();
                 } else {
-                    quizState.isCommandPhase = true;
-                    quizState.current = null;
-                    quizState.options = [];
-                    quizState.sukaraCount = 0;
-                    const commandWindow = document.getElementById('command-window');
-                    commandWindow.style.pointerEvents = 'auto';
-                    document.getElementById('quiz-options').innerHTML = '';
-                    document.getElementById('battle-message').textContent = '';
-                    document.getElementById('battle-feedback').textContent = '';
-                    showCommandOptions();
-                    showQuizOptions();
+                    const correctWords = quizState.current.correctAnswers.map(ans => ans.word).join(' または ');
+                    const feedbackText = quizState.current.questionType === 'related'
+                        ? `正解は「${correctWords}」。「${quizState.current.item.meaning}」に近い意味です`
+                        : quizState.current.questionType === 'antonym'
+                        ? `正解は「${correctWords}」。「${quizState.current.item.meaning}」の反対語です`
+                        : `正解は「${correctWords}」`;
+                    typeMessage(feedbackText, feedback, () => {
+                        quizState.isCommandPhase = true;
+                        quizState.current = null;
+                        quizState.options = [];
+                        quizState.sukaraCount = 0;
+                        const commandWindow = document.getElementById('command-window');
+                        commandWindow.style.pointerEvents = 'auto';
+                        document.getElementById('quiz-options').innerHTML = '';
+                        document.getElementById('battle-message').textContent = '';
+                        document.getElementById('battle-feedback').textContent = '';
+                        showCommandOptions();
+                        showQuizOptions();
+                    }, true); // wait: true でクリック待機
                 }
             });
         });
